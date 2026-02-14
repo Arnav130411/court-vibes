@@ -1,0 +1,132 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { CalendarDays, Clock, MapPin, ChevronRight } from "lucide-react";
+
+const timeSlots = [
+  "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM",
+  "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM",
+  "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM",
+];
+
+const courts = [
+  { id: 1, name: "Court 1 — Indoor" },
+  { id: 2, name: "Court 2 — Indoor" },
+  { id: 3, name: "Court 3 — Premium" },
+];
+
+const BookingSection = () => {
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedCourt, setSelectedCourt] = useState<number | null>(null);
+
+  const today = new Date().toISOString().split("T")[0];
+
+  return (
+    <section id="booking" className="section-padding bg-gradient-dark">
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <span className="text-accent font-semibold text-sm uppercase tracking-widest">
+            Book Your Court
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-heading font-bold text-primary-foreground mt-3 mb-4">
+            Ready to Play?
+          </h2>
+          <p className="text-primary-foreground/60 text-lg">
+            Pick your date, time and court — we'll handle the rest.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="bg-primary-foreground/5 backdrop-blur-md border border-primary-foreground/10 rounded-2xl p-6 sm:p-8"
+        >
+          {/* Date */}
+          <div className="mb-6">
+            <label className="flex items-center gap-2 text-primary-foreground font-semibold mb-3">
+              <CalendarDays size={18} className="text-accent" />
+              Select Date
+            </label>
+            <input
+              type="date"
+              min={today}
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              className="w-full bg-primary-foreground/10 border border-primary-foreground/15 text-primary-foreground rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent"
+            />
+          </div>
+
+          {/* Time */}
+          <div className="mb-6">
+            <label className="flex items-center gap-2 text-primary-foreground font-semibold mb-3">
+              <Clock size={18} className="text-accent" />
+              Select Time Slot
+            </label>
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+              {timeSlots.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setSelectedTime(t)}
+                  className={`py-2.5 rounded-lg text-sm font-medium transition-all ${
+                    selectedTime === t
+                      ? "bg-gradient-primary text-primary-foreground shadow-blue"
+                      : "bg-primary-foreground/10 text-primary-foreground/70 hover:bg-primary-foreground/15"
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Court */}
+          <div className="mb-8">
+            <label className="flex items-center gap-2 text-primary-foreground font-semibold mb-3">
+              <MapPin size={18} className="text-accent" />
+              Select Court
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {courts.map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => setSelectedCourt(c.id)}
+                  className={`py-4 px-4 rounded-xl text-sm font-semibold border-2 transition-all ${
+                    selectedCourt === c.id
+                      ? "border-accent bg-accent/20 text-primary-foreground"
+                      : "border-primary-foreground/10 text-primary-foreground/70 hover:border-primary-foreground/25"
+                  }`}
+                >
+                  {c.name}
+                  <div className="text-xs mt-1 text-primary-foreground/50">₹800/hour</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <button
+            className="w-full bg-gradient-primary text-primary-foreground py-4 rounded-xl font-bold text-lg shadow-blue hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+          >
+            Book Now <ChevronRight size={20} />
+          </button>
+
+          <p className="text-center text-primary-foreground/40 text-sm mt-4">
+            Need to book for events or tournaments?{" "}
+            <a href="#events" className="text-accent underline">
+              Request a Quote
+            </a>
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default BookingSection;
