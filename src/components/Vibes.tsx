@@ -1,15 +1,19 @@
 import { motion } from "framer-motion";
 import { Instagram } from "lucide-react";
-import vibes1 from "@/assets/vibes-1.jpg";
-import vibes2 from "@/assets/vibes-2.jpg";
-import vibes3 from "@/assets/vibes-3.jpg";
-import vibes4 from "@/assets/vibes-4.jpg";
+import courtArena from "@/assets/court-arena.jpg";
+import cafeLounge from "@/assets/cafe-lounge.jpg";
+import courtPickle from "@/assets/court-pickle.jpg";
+import offgroundExterior from "@/assets/offground-exterior.jpg";
+import cafeCounter from "@/assets/cafe-counter.jpg";
+import cafeSeating from "@/assets/cafe-seating.jpg";
 
 const images = [
-  { src: vibes1, alt: "Players on court" },
-  { src: vibes2, alt: "Cafe hangout" },
-  { src: vibes3, alt: "Night court" },
-  { src: vibes4, alt: "Tournament action" },
+  { src: courtArena, alt: "Offground pickleball courts" },
+  { src: offgroundExterior, alt: "Offground exterior" },
+  { src: cafeLounge, alt: "Cozy cafe lounge" },
+  { src: courtPickle, alt: "Pickleball on blue court" },
+  { src: cafeCounter, alt: "Offground cafe counter" },
+  { src: cafeSeating, alt: "Cafe seating area" },
 ];
 
 const Vibes = () => {
@@ -36,14 +40,14 @@ const Vibes = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {images.map((img, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.08 }}
               className={`overflow-hidden rounded-xl ${
                 i === 0 ? "col-span-2 row-span-2" : ""
               }`}

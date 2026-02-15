@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import offgroundExterior from "@/assets/offground-exterior.jpg";
 
 const Hero = () => {
   return (
@@ -8,7 +8,7 @@ const Hero = () => {
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        style={{ backgroundImage: `url(${offgroundExterior})` }}
       />
       {/* Blue overlay */}
       <div className="absolute inset-0 bg-hero-overlay" />
@@ -21,7 +21,7 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <span className="inline-block bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 text-primary-foreground text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            🏓 Bangalore's Premium Pickleball Arena
+            🏓 Pickleball × Coffee — Raja Rajeshwari Nagar
           </span>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground leading-tight mb-6">
