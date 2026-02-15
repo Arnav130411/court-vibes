@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarDays, Clock, MapPin, ChevronRight } from "lucide-react";
+import courtArena from "@/assets/court-arena.jpg";
+import courtPickle from "@/assets/court-pickle.jpg";
 
 const timeSlots = [
   "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM",
@@ -9,9 +11,8 @@ const timeSlots = [
 ];
 
 const courts = [
-  { id: 1, name: "Court 1 — Indoor" },
-  { id: 2, name: "Court 2 — Indoor" },
-  { id: 3, name: "Court 3 — Premium" },
+  { id: 1, name: "Court 1 — Indoor", image: courtArena, desc: "Tournament-grade surface" },
+  { id: 2, name: "Court 2 — Indoor", image: courtPickle, desc: "Premium playing experience" },
 ];
 
 const BookingSection = () => {
@@ -23,7 +24,7 @@ const BookingSection = () => {
 
   return (
     <section id="booking" className="section-padding bg-gradient-dark">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -86,25 +87,44 @@ const BookingSection = () => {
             </div>
           </div>
 
-          {/* Court */}
+          {/* Court Selection with Images */}
           <div className="mb-8">
             <label className="flex items-center gap-2 text-primary-foreground font-semibold mb-3">
               <MapPin size={18} className="text-accent" />
               Select Court
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {courts.map((c) => (
                 <button
                   key={c.id}
                   onClick={() => setSelectedCourt(c.id)}
-                  className={`py-4 px-4 rounded-xl text-sm font-semibold border-2 transition-all ${
+                  className={`relative rounded-xl overflow-hidden border-2 transition-all group ${
                     selectedCourt === c.id
-                      ? "border-accent bg-accent/20 text-primary-foreground"
-                      : "border-primary-foreground/10 text-primary-foreground/70 hover:border-primary-foreground/25"
+                      ? "border-accent shadow-blue"
+                      : "border-primary-foreground/10 hover:border-primary-foreground/25"
                   }`}
                 >
-                  {c.name}
-                  <div className="text-xs mt-1 text-primary-foreground/50">₹800/hour</div>
+                  <div className="aspect-[16/9] overflow-hidden">
+                    <img
+                      src={c.image}
+                      alt={c.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className={`absolute inset-0 transition-colors ${
+                    selectedCourt === c.id ? "bg-accent/20" : "bg-primary/30"
+                  }`} />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-primary/90 to-transparent">
+                    <div className="text-primary-foreground font-heading font-bold text-lg">{c.name}</div>
+                    <div className="text-primary-foreground/70 text-sm">{c.desc}</div>
+                    <div className="text-accent font-semibold text-sm mt-1">₹800/hour</div>
+                  </div>
+                  {selectedCourt === c.id && (
+                    <div className="absolute top-3 right-3 bg-accent text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+                      ✓
+                    </div>
+                  )}
                 </button>
               ))}
             </div>
