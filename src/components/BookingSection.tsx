@@ -47,11 +47,11 @@ const BookingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="bg-primary-foreground/5 backdrop-blur-md border border-primary-foreground/10 rounded-2xl p-6 sm:p-8"
+          className="bg-card rounded-2xl p-6 sm:p-8 shadow-large"
         >
           {/* Date */}
           <div className="mb-6">
-            <label className="flex items-center gap-2 text-primary-foreground font-semibold mb-3">
+            <label className="flex items-center gap-2 text-card-foreground font-semibold mb-3">
               <CalendarDays size={18} className="text-accent" />
               Select Date
             </label>
@@ -60,13 +60,13 @@ const BookingSection = () => {
               min={today}
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="w-full bg-primary-foreground/10 border border-primary-foreground/15 text-primary-foreground rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full bg-secondary border border-border text-foreground rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </div>
 
           {/* Time */}
           <div className="mb-6">
-            <label className="flex items-center gap-2 text-primary-foreground font-semibold mb-3">
+            <label className="flex items-center gap-2 text-card-foreground font-semibold mb-3">
               <Clock size={18} className="text-accent" />
               Select Time Slot
             </label>
@@ -78,7 +78,7 @@ const BookingSection = () => {
                   className={`py-2.5 rounded-lg text-sm font-medium transition-all ${
                     selectedTime === t
                       ? "bg-gradient-primary text-primary-foreground shadow-blue"
-                      : "bg-primary-foreground/10 text-primary-foreground/70 hover:bg-primary-foreground/15"
+                      : "bg-secondary text-foreground hover:bg-muted"
                   }`}
                 >
                   {t}
@@ -89,7 +89,7 @@ const BookingSection = () => {
 
           {/* Court Selection with Images */}
           <div className="mb-8">
-            <label className="flex items-center gap-2 text-primary-foreground font-semibold mb-3">
+            <label className="flex items-center gap-2 text-card-foreground font-semibold mb-3">
               <MapPin size={18} className="text-accent" />
               Select Court
             </label>
@@ -101,7 +101,7 @@ const BookingSection = () => {
                   className={`relative rounded-xl overflow-hidden border-2 transition-all group ${
                     selectedCourt === c.id
                       ? "border-accent shadow-blue"
-                      : "border-primary-foreground/10 hover:border-primary-foreground/25"
+                      : "border-border hover:border-primary"
                   }`}
                 >
                   <div className="aspect-[16/9] overflow-hidden">
@@ -112,16 +112,14 @@ const BookingSection = () => {
                       loading="lazy"
                     />
                   </div>
-                  <div className={`absolute inset-0 transition-colors ${
-                    selectedCourt === c.id ? "bg-accent/20" : "bg-primary/30"
-                  }`} />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-primary/90 to-transparent">
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
                     <div className="text-primary-foreground font-heading font-bold text-lg">{c.name}</div>
                     <div className="text-primary-foreground/70 text-sm">{c.desc}</div>
                     <div className="text-accent font-semibold text-sm mt-1">₹800/hour</div>
                   </div>
                   {selectedCourt === c.id && (
-                    <div className="absolute top-3 right-3 bg-accent text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+                    <div className="absolute top-3 right-3 bg-accent text-accent-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
                       ✓
                     </div>
                   )}
@@ -137,7 +135,7 @@ const BookingSection = () => {
             Book Now <ChevronRight size={20} />
           </button>
 
-          <p className="text-center text-primary-foreground/40 text-sm mt-4">
+          <p className="text-center text-muted-foreground text-sm mt-4">
             Need to book for events or tournaments?{" "}
             <a href="#events" className="text-accent underline">
               Request a Quote

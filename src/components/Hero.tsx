@@ -27,7 +27,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/15 text-primary-foreground text-sm font-medium px-5 py-2 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-card text-card-foreground text-sm font-medium px-5 py-2 rounded-full mb-8 shadow-large"
           >
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
             Pickleball × Coffee — RR Nagar, Bangalore
@@ -55,7 +55,7 @@ const Hero = () => {
             </a>
             <a
               href="#cafe"
-              className="w-full sm:w-auto border border-primary-foreground/25 text-primary-foreground px-10 py-4 rounded-full text-base font-semibold hover:bg-primary-foreground/10 transition-colors flex items-center justify-center gap-2"
+              className="w-full sm:w-auto border-2 border-primary-foreground text-primary-foreground px-10 py-4 rounded-full text-base font-semibold hover:bg-primary-foreground hover:text-primary transition-colors flex items-center justify-center gap-2"
             >
               <Coffee size={18} /> Visit Cafe
             </a>
