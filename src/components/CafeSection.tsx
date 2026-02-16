@@ -2,6 +2,14 @@ import { motion } from "framer-motion";
 import { Coffee, Leaf, Zap, UtensilsCrossed } from "lucide-react";
 import cafeSeating from "@/assets/cafe-seating.jpg";
 import mangoMatcha from "@/assets/mango-matcha.jpg";
+import berryMatcha from "@/assets/berry-matcha.jpg";
+import coconutMatcha from "@/assets/coconut-matcha.png";
+
+const drinks = [
+  { src: mangoMatcha, name: "Mango Matcha", price: "₹250" },
+  { src: berryMatcha, name: "Berry Matcha", price: "₹250" },
+  { src: coconutMatcha, name: "Coconut Float", price: "₹280" },
+];
 
 const menuItems = [
   { icon: Coffee, name: "Artisan Coffee", desc: "Espresso, cappuccino, cold brew", price: "From ₹150" },
@@ -18,7 +26,7 @@ const CafeSection = () => {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${cafeSeating})` }}
       />
-      <div className="absolute inset-0 bg-hero-overlay opacity-90" />
+      <div className="absolute inset-0 bg-primary opacity-95" />
 
       <div className="relative z-10 section-padding">
         <div className="max-w-6xl mx-auto">
@@ -39,15 +47,31 @@ const CafeSection = () => {
             </p>
           </motion.div>
 
-          {/* Single hero image for the cafe */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="rounded-2xl overflow-hidden aspect-[21/9] mb-14"
-          >
-            <img src={mangoMatcha} alt="Signature Mango Matcha" className="w-full h-full object-cover" loading="lazy" />
-          </motion.div>
+          {/* Signature Drinks Gallery */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-14">
+            {drinks.map((drink, i) => (
+              <motion.div
+                key={drink.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.12 }}
+                className="group relative rounded-2xl overflow-hidden aspect-[3/4]"
+              >
+                <img
+                  src={drink.src}
+                  alt={drink.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="font-heading font-bold text-primary-foreground text-lg">{drink.name}</h3>
+                  <span className="text-accent font-semibold text-sm">{drink.price}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
           {/* Menu Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
@@ -58,13 +82,13 @@ const CafeSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/10 rounded-xl p-6 hover:bg-primary-foreground/15 transition-colors"
+                className="bg-card rounded-xl p-6 hover:shadow-blue transition-shadow"
               >
                 <item.icon className="text-accent mb-3" size={28} />
-                <h3 className="font-heading font-bold text-primary-foreground text-lg mb-1">
+                <h3 className="font-heading font-bold text-card-foreground text-lg mb-1">
                   {item.name}
                 </h3>
-                <p className="text-primary-foreground/60 text-sm mb-3">{item.desc}</p>
+                <p className="text-muted-foreground text-sm mb-3">{item.desc}</p>
                 <span className="text-accent font-semibold text-sm">{item.price}</span>
               </motion.div>
             ))}
@@ -79,7 +103,7 @@ const CafeSection = () => {
             </a>
             <a
               href="#events"
-              className="border border-primary-foreground/30 text-primary-foreground px-8 py-3.5 rounded-full font-semibold hover:bg-primary-foreground/10 transition-colors"
+              className="border-2 border-primary-foreground text-primary-foreground px-8 py-3.5 rounded-full font-semibold hover:bg-primary-foreground hover:text-primary transition-colors"
             >
               Host a Hangout
             </a>
