@@ -45,7 +45,7 @@ const Hero = () => {
             <span className="text-gradient">CHILL HARDER.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-primary-foreground/60 max-w-lg mx-auto mb-12 font-body leading-relaxed">
+          <p className="text-base sm:text-lg text-primary-foreground/60 max-w-lg mx-auto mb-10 font-body leading-relaxed">
             Premium pickleball courts meet artisan cafe. 
             The only spot in Bangalore where game day feels like a vibe.
           </p>
