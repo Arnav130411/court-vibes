@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -10,6 +10,14 @@ const navLinks = [
   { label: "Cafe", href: "#cafe" },
   { label: "Events", href: "#events" },
 ];
+
+const smoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  const target = document.querySelector(href);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -27,7 +35,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/95 backdrop-blur-md shadow-large border-b border-border"
+          ? "bg-background shadow-large border-b border-border"
           : "bg-transparent"
       }`}
     >
@@ -45,6 +53,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => smoothScroll(e, link.href)}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   scrolled ? "text-foreground" : "text-primary-foreground/80"
                 }`}
@@ -54,6 +63,7 @@ const Navbar = () => {
             ))}
             <a
               href="#booking"
+              onClick={(e) => smoothScroll(e, "#booking")}
               className="bg-gradient-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold shadow-blue hover:opacity-90 transition-opacity"
             >
               Book Now
@@ -84,7 +94,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => { smoothScroll(e, link.href); setMobileOpen(false); }}
                   className="block text-foreground font-medium py-2"
                 >
                   {link.label}
@@ -92,7 +102,7 @@ const Navbar = () => {
               ))}
               <a
                 href="#booking"
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => { smoothScroll(e, "#booking"); setMobileOpen(false); }}
                 className="block bg-gradient-primary text-primary-foreground text-center px-5 py-3 rounded-lg font-semibold shadow-blue"
               >
                 Book Now

@@ -2,18 +2,23 @@ import { motion } from "framer-motion";
 import { ChevronRight, Coffee, Zap } from "lucide-react";
 import courtArena from "@/assets/court-arena.jpg";
 
+const smoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  const target = document.querySelector(href);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
+
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary">
-      {/* Background image with heavy dark overlay for that stony vibe */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Full background image — no overlay */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${courtArena})` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/95 via-primary/70 to-primary/95" />
-
-      {/* Grain texture overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-primary/50" />
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -49,12 +54,14 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#booking"
+              onClick={(e) => smoothScroll(e, "#booking")}
               className="w-full sm:w-auto bg-primary-foreground text-primary px-10 py-4 rounded-full text-base font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-large"
             >
               Book a Court <ChevronRight size={18} />
             </a>
             <a
               href="#cafe"
+              onClick={(e) => smoothScroll(e, "#cafe")}
               className="w-full sm:w-auto border-2 border-primary-foreground text-primary-foreground px-10 py-4 rounded-full text-base font-semibold hover:bg-primary-foreground hover:text-primary transition-colors flex items-center justify-center gap-2"
             >
               <Coffee size={18} /> Visit Cafe
